@@ -24,3 +24,28 @@ export const Colors = {
     tabIconSelected: tintColorDark,
   },
 };
+
+export const Icons = () => {
+  bookmark:  require('../assets/svg/icons/bookmark.png')
+  eye:  require('../assets/svg/icons/eye.png')
+  eye_hide:  require('../assets/svg/icons/eye-hide.png')
+  home:  require('../assets/svg/icons/home.png')
+  left_arrow:  require('@/assets/svg/icons/left-arrow.png')
+  logout:  require('../assets/svg/icons/bookmark.png')
+  menu:  require('../assets/svg/icons/menu.png')
+  play:  require('../assets/svg/icons/plus.png')
+  profile:  require('../assets/svg/icons/profile.png')
+  right_arrow:  require('../assets/svg/icons/right-arrow.png')
+  search:  require('../assets/svg/icons/search.png')
+  upload:  require('../assets/svg/icons/upload.png')
+}
+
+
+export const images = {
+  cards: require('../assets/svg/images/cards.png'),
+  empty: require('../assets/svg/images/empty.png'),
+  logo_small: require('../assets/svg/images/logo-small.png'),
+  logo: require('../assets/svg/images/logo.png'),
+  path: require('../assets/svg/images/path.png'),
+  thumbnail: require('../assets/svg/images/thumbnail.png'), 
+}
