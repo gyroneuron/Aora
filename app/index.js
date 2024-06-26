@@ -12,13 +12,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Logo from "../assets/svg/images/logo.png";
 import CardImage from "../assets/svg/images/cards.png";
 import { images } from "../constants/Colors";
-import { router } from "expo-router";
+import { Redirect, router } from "expo-router";
 import CustomButton from "../components/CustomButton";
-
+import { UseGlobalContext } from "../context/GlobalProvider";
 
 
 const index = () => {
-  
+  const {isLoading, isLoggedIn} = UseGlobalContext();
+
+  if(!isLoading && isLoggedIn) return <Redirect href='/HomeScreen'/>
 
   const handleContinue = () => {
     router.navigate("/(auth)/LoginScreen");
@@ -26,9 +28,8 @@ const index = () => {
   return (
     <SafeAreaView className=" bg-primary flex-1 items-center justify-center">
       <StatusBar hidden/>
-      <ScrollView contentContainerStyle={{ height: "100%", width: '90%', flex: 1}}>
         <View
-          className="flex-1 items-center justify-center" 
+          className="flex-1 items-center justify-center w-[90%]" 
         >
           <Image
             source={Logo}
@@ -57,7 +58,6 @@ const index = () => {
             handlePress={handleContinue}
           />
         </View>
-      </ScrollView>
     </SafeAreaView>
   );
 };

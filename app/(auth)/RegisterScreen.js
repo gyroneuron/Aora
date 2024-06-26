@@ -6,12 +6,14 @@ import {
   TextInput,
   TouchableOpacity,
   StatusBar,
+  Alert,
 } from "react-native";
 import React, { useState, useEffect } from "react";
 import Logo from "../../assets/svg/images/logo.png";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { createUser } from "../../lib/appwrite";
 
 const RegisterScreen = () => {
   const [username, setUsername] = useState("");
@@ -25,9 +27,23 @@ const RegisterScreen = () => {
   const [ispasswordtyping, setIsPasswordTyping] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSignup = () => {
-    router.navigate("LoginScreen");
+
+  const handleSignup = async () => {
+    if(!username || !email || !password){
+      Alert.alert('Error', 'Please fill in all the fields')
+    }
+    setIsSubmitting(true)
+    
+    try {
+      const result = await createUser(email, password, username)
+      router.replace('LoginScreen')
+    } catch (error) {
+      Alert.alert('Error', error.message
+      )
+      setIsSubmitting(false)
+    }
   };
 
   useEffect(() => {

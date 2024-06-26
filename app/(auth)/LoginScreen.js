@@ -8,12 +8,14 @@ import {
   TextInput,
   KeyboardAvoidingView,
   Platform,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import Logo from "../../assets/svg/images/logo.png";
 import CustomButton from "../../components/CustomButton";
 import { router } from "expo-router";
+import { signIn } from "../../lib/appwrite";
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");
@@ -22,11 +24,24 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const [isvalidPassword, setIsValidPassword] = useState(true);
   const [ispasswordtyping, setIsPasswordTyping] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setLoading] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
 
-  const handleLogin = () => {
-    router.navigate("RegisterScreen");
+  const handleLogin = async () => {
+    if(!email || !password){
+      Alert.alert('Error', 'Please fill in all the fields')
+    }
+    setIsSubmitting(true)
+    
+    try {
+      await signIn(email, password)
+      router.replace('/HomeScreen')
+    } catch (error) {
+      Alert.alert('Error', error.message
+      )
+      setIsSubmitting(false)
+    }
   };
 
   useEffect(() => {
@@ -66,7 +81,7 @@ const LoginScreen = () => {
             <Text className="text-gray-100 text-base my-3 self-start">Email</Text>
             <View className="rounded-2xl  border-2 border-black-100 bg-black-100 h-16 w-full items-center justify-center focus:border-secondary">
               <TextInput
-                className="w-full h-full text-base px-4"
+                className="w-full h-full text-base px-4 text-white"
                 value={email}
                 onChangeText={(text) => {
                   setEmail(text);
