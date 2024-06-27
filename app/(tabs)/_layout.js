@@ -30,9 +30,7 @@ const _layout = () => {
             tabBarInactiveTintColor: '#CDCE0',
             tabBarStyle: {
                 backgroundColor: '#161622',
-                height: '7%',
-                borderTopLeftRadius: 25,
-                borderTopRightRadius: 25,
+                height:'10%'
             }
         }}
     >
